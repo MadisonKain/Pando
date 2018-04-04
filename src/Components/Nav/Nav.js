@@ -42,9 +42,17 @@ class Nav extends Component {
                     onRequestClose={this.handleRequestClose}
                 >
                     <Menu>
-                        <MenuItem primaryText="SHOP" />
-                        <MenuItem primaryText="PROFILE" />
-                        <MenuItem primaryText="FAVORITES" />
+                        <a href='http://localhost:3000/#/'>
+                            <MenuItem primaryText='HOME' />
+                        </a>
+                        <a href='http://localhost:3000/#/shop'>
+                            <MenuItem primaryText="SHOP" />
+                        </a>
+                        {/* <MenuItem primaryText="PROFILE" /> */}
+                        {/* <MenuItem primaryText="FAVORITES" /> */}
+                        <a href='http://localhost:3000/#/cart'>
+                            <MenuItem primaryText="CART" />
+                        </a>
                         <a href='http://localhost:3005/auth'>
                             <MenuItem primaryText="LOGIN" />
                         </a>
