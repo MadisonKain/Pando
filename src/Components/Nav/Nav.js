@@ -1,20 +1,58 @@
 import React, { Component } from 'react';
+import './Nav.css';
+
+import { AppBar, Popover, MenuItem, Menu } from 'material-ui';
 
 class Nav extends Component {
-    constructor(){
+    constructor() {
         super()
         this.state = {
-
+            open: false
         }
     }
 
-    
+    handleClick = (event) => {
+        event.preventDefault();
 
-    render(){
-        return(
+        this.setState({
+            open: true,
+            anchorEl: event.currentTarget,
+        });
+    };
+
+    handleRequestClose = () => {
+        this.setState({
+            open: false,
+        });
+    };
+
+    render() {
+        return (
             <div>
-                NAV
-            </div>
+                <AppBar
+                    title="WITTY ART TITLE"
+                    className="nav"
+                    onClick={this.handleClick}
+                />
+                <Popover
+                    open={this.state.open}
+                    anchorEl={this.state.anchorEl}
+                    anchorOrigin={{ horizontal: 'left', vertical: 'bottom' }}
+                    targetOrigin={{ horizontal: 'left', vertical: 'top' }}
+                    onRequestClose={this.handleRequestClose}
+                >
+                    <Menu>
+                        <MenuItem primaryText="SHOP" />
+                        <MenuItem primaryText="PROFILE" />
+                        <MenuItem primaryText="FAVORITES" />
+                        <a href='http://localhost:3005/auth'>
+                            <MenuItem primaryText="LOGIN" />
+                        </a>
+                    </Menu>
+                </Popover>
+            </div >
         )
     }
 }
+
+export default Nav
