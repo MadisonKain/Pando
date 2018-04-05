@@ -1,19 +1,34 @@
 import React, { Component } from 'react';
+import axios from 'axios';
+import Product from '../Product/Product';
 
 class Shop extends Component {
-    constructor(){
+    constructor() {
         super()
         this.state = {
-
+            products: []
         }
     }
 
+    componentDidMount() {
+        axios.get('/shop').then((response) => {
+            this.setState({
+                products: response.data
+            })
+        })
+
+    }
 
 
-    render(){
-        return(
+    render() {
+        const product = this.state.products.map( item => (
+            <Product key={ item.id }
+                products={ item }
+            />
+        ))
+        return (
             <div>
-                SHOP!
+                { product }
             </div>
         )
     }

@@ -32,7 +32,7 @@ class Nav extends Component {
                 <AppBar
                     title="WITTY ART TITLE"
                     className="nav"
-                    onClick={this.handleClick}
+                    onLeftIconButtonClick={this.handleClick}
                 />
                 <Popover
                     open={this.state.open}

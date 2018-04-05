@@ -1,0 +1,14 @@
+.productContainer{
+    border: solid 3px;
+    border-color: grey;
+    border-radius: 30px;
+}
+
+.productPhoto{
+    width: 70%
+}
+
+.product{
+   margin-top: 10px;
+   margin-bottom: 10px; 
+}
