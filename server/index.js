@@ -41,18 +41,33 @@ passport.use( new Auth0Strategy({
     callbackURL: CALLBACK_URL,
     scope: 'openid profile'
 }, ( accessToken, refreshToken, extraParams, profile, done ) => {
-    done( null, profile );
+    const db = app.get( 'db' );
+    db.find_user( [profile.id] ).then( userResult => {
+        if( !userResult[0] ){
+            db.create_user( [
+                profile.name,
+                profile.picture
+            ]).then( createdUser => {
+                return done( null, createdUser[0].id );
+            })
+        } else {
+            return done( null, userResult[0].id );
+        }
+    })
 }))
 
-passport.serializeUser( ( profile, done ) => {
-    done( null, profile );
+passport.serializeUser( ( id, done ) => {
+    done( null, id );
 });
-passport.deserializeUser( ( profile, done ) => {
-    done( null, profile );
+passport.deserializeUser( ( id, done ) => {
+    app.get( 'db' ).find_user( [ id ] ).then( loggedInUser => {
+        done( null, loggedInUser[0] );
+    })
 })
+
 app.get( '/auth', passport.authenticate( 'auth0' ) );
 app.get( '/auth/callback', passport.authenticate( 'auth0', {
-    successRedirect: 'http://localhost:3000/#/landing'
+    successRedirect: 'http://localhost:3000/#/shop'
 } ) );
 
 //================ ENDPOINTS ===============//

@@ -4,7 +4,7 @@ import './Landing.css';
 function Landing(){
     return(
         <div>
-            LANDING
+            <div className='pageTitle'>HOME</div>
         </div>
     )
 }

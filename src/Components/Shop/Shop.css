@@ -1,0 +1,25 @@
+.shopContainer{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+
+}
+.pageTitle{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: white;
+    height: 50px;
+    background-color: #517698;
+    width: 100%;
+    border: solid 3px white;
+    margin-bottom: 20px;
+    font-family: 'Roboto', sans-serif;
+}
+
+@media( min-width:700px ){
+    .shopContainer{
+        flex-direction: row;
+        margin: 20px;
+    }
+}

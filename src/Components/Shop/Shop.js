@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import axios from 'axios';
 import Product from '../Product/Product';
+import './Shop.css';
 
 class Shop extends Component {
     constructor() {
@@ -28,7 +29,12 @@ class Shop extends Component {
         ))
         return (
             <div>
-                { product }
+                <div className='pageTitle'>
+                    SHOP
+                </div>
+                <div className="shopContainer">
+                    { product }
+                </div>
             </div>
         )
     }
