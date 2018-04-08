@@ -1,0 +1,36 @@
+.pageTitle{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: white;
+    height: 50px;
+    background-color: #517698;
+    width: 100%;
+    border: solid 3px white;
+    font-family: 'Roboto', sans-serif;
+}
+.selectedInfoContainer{
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    width: 80%;
+    justify-content: center;
+    align-items: center;
+    border: solid 3px #517698;
+    border-radius: 30px;
+    margin: 10px;
+}
+.itemInfo{
+    margin: 10px;
+    word-wrap: break-word;
+    width: 100%;
+}
+.productPhoto{
+    width: 80%;
+}
+.mainContainer{
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    align-items: center;
+}

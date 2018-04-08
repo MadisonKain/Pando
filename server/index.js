@@ -20,14 +20,15 @@ const{
 const app = express();
 app.use( bodyParser.json() );
 
-massive( process.env.CONNECTION_STRING ).then( db => {app.set('db', db)});
+massive( process.env.CONNECTION_STRING ).then( db => {app.set('db', db)}).catch(err=>{
+    console.log('connecting to db', err)
+})
 
 app.use( session({
     secret: SESSION_SECRET,
     resave: false,
     saveUninitialized: true
 }) );
-
 
 //========== AUTH0 STUFF ==========//
 
@@ -42,30 +43,41 @@ passport.use( new Auth0Strategy({
     scope: 'openid profile'
 }, ( accessToken, refreshToken, extraParams, profile, done ) => {
     const db = app.get( 'db' );
+    // console.log( profile )
     db.find_user( [profile.id] ).then( userResult => {
         if( !userResult[0] ){
             db.create_user( [
-                profile.name,
-                profile.picture
+                profile.displayName,
+                profile.picture,
+                profile.id
             ]).then( createdUser => {
                 return done( null, createdUser[0].id );
+            }).catch(err=>{
+                console.log('create user', err)
             })
         } else {
-            return done( null, userResult[0].id );
+            return done( null, userResult[0].auth_id );
         }
+    }).catch(err=>{
+        console.log('find user', err)
     })
 }))
 
 passport.serializeUser( ( id, done ) => {
     done( null, id );
 });
+
 passport.deserializeUser( ( id, done ) => {
+    console.log( id );
     app.get( 'db' ).find_user( [ id ] ).then( loggedInUser => {
         done( null, loggedInUser[0] );
+    }).catch(err=>{
+        console.log('deserialize', err)
     })
-})
+});
 
 app.get( '/auth', passport.authenticate( 'auth0' ) );
+
 app.get( '/auth/callback', passport.authenticate( 'auth0', {
     successRedirect: 'http://localhost:3000/#/shop'
 } ) );
@@ -74,9 +86,7 @@ app.get( '/auth/callback', passport.authenticate( 'auth0', {
 
 app.get( '/shop', pc.getAllProducts );
 
-
-
-
+app.get( '/product/:id', pc.getSelectedItem );
 
 
 
