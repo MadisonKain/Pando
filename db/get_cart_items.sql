@@ -4,5 +4,4 @@ SELECT *
         ON OT.id = C.o_id
     JOIN Products as P
         ON P.id = C.p_id
-    WHERE OT.status = true
-RETURNING *;
+    WHERE OT.status = true;
