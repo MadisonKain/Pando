@@ -14,12 +14,24 @@ const {
    DOMAIN,
    CLIENT_ID,
    CLIENT_SECRET,
-   CALLBACK_URL
+   CALLBACK_URL,
+   DEV_MODE
 } = process.env;
 
 const app = express();
 
 app.use( bodyParser.json() );
+
+app.use( ( req, res, next ) => {
+    if( DEV_MODE ){
+        req.user = {
+            id: 10,
+            name: "Madison Kain",
+            profile_pic: "https://lh6.googleusercontent.com/-aGfh3X45fWY/AAAAAAAAAAI/AAAAAAAAAKw/Ii_3qw-DxBk/photo.jpg"
+        }
+    }
+    next();
+})
 
 massive( CONNECTION_STRING ).then( db => {
    app.set( 'db', db )
@@ -93,8 +105,10 @@ app.get( '/shop', pc.getAllProducts );
 
 app.get( '/product/:id', pc.getSelectedItem );
 
-// app.get( '/cart', pc.getCartItems );
+app.get( '/cart', pc.getCartItems );
 
-app.post( '/cart/:id', pc.addToCart );
+app.post( '/cart/add/:id', pc.addToCart );
+
+app.delete( '/cart/delete/:id', pc.deleteFromCart );
 
 app.listen( SERVER_PORT, () => console.log( `Searching for Rebel scum on port ${SERVER_PORT}`));
