@@ -20,7 +20,7 @@ class Cart extends Component {
     }
 
     componentDidMount() {
-        axios.get('/cart')
+        axios.get( '/cart' )
             .then(response => {
                 this.setState({
                     cartItems: response.data
