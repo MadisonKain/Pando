@@ -1,3 +1,2 @@
-SELECT * FROM OrderTable
+SELECT id FROM OrderTable
     WHERE u_id = $1 AND status = true
-    RETURNING *;
