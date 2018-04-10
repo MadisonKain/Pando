@@ -4,6 +4,7 @@ import { IconButton } from 'material-ui';
 import AddShoppingCart from 'material-ui/svg-icons/action/add-shopping-cart';
 import { deepOrange400 } from 'material-ui/styles/colors';
 import { Link } from 'react-router-dom';
+import axios from 'axios';
 
 class Product extends Component {
     constructor( props ) {
@@ -13,6 +14,9 @@ class Product extends Component {
         }
     }
 
+    handleClick(){
+        axios.post( `/cart/${this.props.products.id}` )
+    }
     
 
     render() {
@@ -32,7 +36,8 @@ class Product extends Component {
                         ${ price }
                     </div>
                     <IconButton>
-                        <AddShoppingCart hoverColor={ deepOrange400 }/>
+                        <AddShoppingCart hoverColor={ deepOrange400 }
+                                        onClick={ e => {this.handleClick()}}/>
                     </IconButton>
                 </div>
 
