@@ -17,9 +17,14 @@ class Cart extends Component {
         this.state = {
             cartItems: []
         }
+        this.updateCart = this.updateCart.bind(this);
     }
 
     componentDidMount() {
+        this.updateCart();
+    }
+    
+    updateCart(){
         axios.get( '/cart' )
             .then(response => {
                 this.setState({
@@ -28,17 +33,21 @@ class Cart extends Component {
             })
     }
 
+    goBack(){
+        this.props.history.goBack();
+    }
 
     render() {
         const product = this.state.cartItems.map(item => {
             return <CartItem key={item.id}
-                products={item} />
+                products={item} 
+                updateCart={this.updateCart}/>
         })
         console.log(product)
         return (
             <div>
                 <div className='pageTitle'>
-                    <IconButton>
+                    <IconButton onClick={ () => { this.goBack() } }>
                         <ArrowBack hoverColor={orange50} />
                     </IconButton>
                     MY CART

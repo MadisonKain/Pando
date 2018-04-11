@@ -22,16 +22,16 @@ const app = express();
 
 app.use( bodyParser.json() );
 
-app.use( ( req, res, next ) => {
-    if( DEV_MODE ){
-        req.user = {
-            id: 10,
-            name: "Madison Kain",
-            profile_pic: "https://lh6.googleusercontent.com/-aGfh3X45fWY/AAAAAAAAAAI/AAAAAAAAAKw/Ii_3qw-DxBk/photo.jpg"
-        }
-    }
-    next();
-})
+// app.use( ( req, res, next ) => {
+//     if( DEV_MODE ){
+//         req.user = {
+//             id: 10,
+//             name: "Madison Kain",
+//             profile_pic: "https://lh6.googleusercontent.com/-aGfh3X45fWY/AAAAAAAAAAI/AAAAAAAAAKw/Ii_3qw-DxBk/photo.jpg"
+//         }
+//     }
+//     next();
+// })
 
 massive( CONNECTION_STRING ).then( db => {
    app.set( 'db', db )
@@ -92,12 +92,16 @@ app.get( '/auth/callback', passport.authenticate( 'auth0', {
 
 app.get( '/auth/me', function( req, res ) {
    if( req.user ) {
-       console.log( 'send req.user' );
        res.status( 200 ).send( req.user );
    } else {
        res.status( 401 ).send( 'You need to log in!' );
    }
 })
+
+app.get( '/auth/logout', ( req, res )=> {
+    req.logOut();
+    res.redirect( 'http://localhost:3000/' );
+} )
 
 // ================ ENDPOINTS =============== //
 
@@ -106,6 +110,8 @@ app.get( '/shop', pc.getAllProducts );
 app.get( '/product/:id', pc.getSelectedItem );
 
 app.get( '/cart', pc.getCartItems );
+
+// app.get( '/profile/:id', pc.getUserInfo );
 
 app.post( '/cart/add/:id', pc.addToCart );
 

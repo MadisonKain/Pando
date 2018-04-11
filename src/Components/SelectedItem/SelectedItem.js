@@ -4,6 +4,9 @@ import './SelectedItem.css';
 import { IconButton } from 'material-ui';
 import AddShoppingCart from 'material-ui/svg-icons/action/add-shopping-cart';
 import { deepOrange400 } from 'material-ui/styles/colors';
+import ArrowBack from 'material-ui/svg-icons/navigation/arrow-back';
+import { orange50 } from 'material-ui/styles/colors';
+
 
 class SelectedItem extends Component {
     constructor(props) {
@@ -14,12 +17,16 @@ class SelectedItem extends Component {
     }
 
     componentDidMount() {
-        axios.get( `/product/${this.props.match.params.id}` )
-            .then( item => {
+        axios.get(`/product/${this.props.match.params.id}`)
+            .then(item => {
                 this.setState({
                     product: item.data
                 })
             })
+    }
+
+    goBack(){
+        this.props.history.goBack();
     }
 
     render() {
@@ -28,17 +35,20 @@ class SelectedItem extends Component {
             <div>
                 {product[0] &&
                     <div className='mainContainer'>
-                        <div className = 'pageTitle'>
-                            { product[0].name }
+                        <div className='pageTitle'>
+                            <IconButton onClick={() => { this.goBack() }}>
+                                <ArrowBack hoverColor={orange50} />
+                            </IconButton>
+                            {product[0].name}
                         </div>
                         <img className='productPhoto'
-                            src={ product[0].picture } />
+                            src={product[0].picture} />
                         <div className='selectedInfoContainer'>
                             <div className='itemInfo'>
-                                { product[0].description }
+                                {product[0].description}
                             </div>
                             <div className='itemInfo'>
-                                ${ product[0].price }
+                                ${product[0].price}
                                 <div>
                                     <IconButton>
                                         <AddShoppingCart hoverColor={deepOrange400} />

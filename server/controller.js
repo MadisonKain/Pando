@@ -53,7 +53,11 @@ module.exports = {
             .then( quantity => {
                 var oldQuantity = quantity[0].quantity
                 var newQuantity = --oldQuantity
-                res.app.get( 'db' ).update_quantity( [oldQuantity, req.params.id, order[0].id] )
+                if ( oldQuantity === 0 ){
+                    res.app.get( 'db' ).delete_from_cart( [req.params.id, order[0].id] )
+                } else {
+                    res.app.get( 'db' ).update_quantity( [newQuantity, req.params.id, order[0].id] )
+                }
             }).catch( err => { console.log('UPDATE CART QUANTITY ERROR', err) } )
         }).catch( err => { console.log('GET CART QUANTITY ERROR', err) } )
     }
