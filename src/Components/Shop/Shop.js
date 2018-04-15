@@ -3,11 +3,16 @@ import axios from 'axios';
 import Product from '../Product/Product';
 import './Shop.css';
 
+import IconButton from 'material-ui/IconButton';
+import Search from 'material-ui/svg-icons/action/search';
+
 class Shop extends Component {
     constructor() {
         super()
         this.state = {
-            products: []
+            products: [],
+            searchShowing: false,
+            searchInput: ''
         }
     }
 
@@ -20,17 +25,40 @@ class Shop extends Component {
     }
 
 
+    handleSearch(){
+        console.log( 'hit' )
+    }
+
+
+    updateSearchInput( e ){
+        this.setState({
+            searchInput: e.target.value
+        })
+        console.log( this.state.searchInput )
+    }
+
 
     render() {
+
         const product = this.state.products.map( item => (
             <Product key={ item.id }
                 products={ item }
             />
         ))
+
         return (
             <div>
-                <div className='pageTitle'>
+                <div className='shopTitle'>
                     SHOP
+                </div>
+                <div className='searchBar'>
+                    <input 
+                        placeholder='Search' 
+                        onChange={ (e)=>{ this.updateSearchInput( e ) } }
+                    />
+                    <IconButton>
+                        <Search onClick={ () => { this.handleSearch() } }/>
+                    </IconButton>
                 </div>
                 <div className="shopContainer">
                     { product }

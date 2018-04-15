@@ -6,6 +6,7 @@ import { Link } from 'react-router-dom';
 
 import { AppBar, Popover, MenuItem, Menu } from 'material-ui';
 
+
 class Nav extends Component {
     constructor(props) {
         super(props)
@@ -41,12 +42,15 @@ class Nav extends Component {
         const userLoggedIn = !!this.props.user.name ?
             (
                 <div>
+                    <a href='http://localhost:3000/#/cart'>
+                        <MenuItem primaryText="CART" />
+                    </a>
                     <Link to={`/profile/${this.props.user.id}`}>
                         <MenuItem primaryText='PROFILE' />
                     </Link>
-                    <Link href='http://localhost:3005/auth/logout'>
+                    <a href='http://localhost:3005/auth/logout'>
                         <MenuItem primaryText="LOGOUT" />
-                    </Link>
+                    </a>
                 </div>
             )
             :
@@ -79,9 +83,6 @@ class Nav extends Component {
                             <MenuItem primaryText="SHOP" />
                         </a>
                         {/* <MenuItem primaryText="FAVORITES" /> */}
-                        <a href='http://localhost:3000/#/cart'>
-                            <MenuItem primaryText="CART" />
-                        </a>
                         {userLoggedIn}
                     </Menu>
                 </Popover>

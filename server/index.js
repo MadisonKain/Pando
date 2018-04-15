@@ -111,7 +111,7 @@ app.get( '/product/:id', pc.getSelectedItem );
 
 app.get( '/cart', pc.getCartItems );
 
-// app.get( '/profile/:id', pc.getUserInfo );
+app.get( '/profile/:id', pc.getUserInfo );
 
 app.post( '/cart/add/:id', pc.addToCart );
 

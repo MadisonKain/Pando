@@ -8,6 +8,7 @@ import ArrowBack from 'material-ui/svg-icons/navigation/arrow-back';
 import { deepOrange400 } from 'material-ui/styles/colors';
 import { orange50 } from 'material-ui/styles/colors';
 
+
 class CartItem extends Component {
     constructor( props ){
         super( props )

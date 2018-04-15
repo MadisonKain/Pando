@@ -12,7 +12,6 @@ module.exports = {
         })
     },
     addToCart: ( req, res ) => {
-        // console.log( 'HIT addToCart!' )
         req.app.get( 'db' ).find_active_order( [req.session.passport.user] )
         .then( order => {
             if ( !order[0] ){
@@ -32,7 +31,7 @@ module.exports = {
                             var oldQuantity = quantity[0].quantity
                             var newQuantity = ++oldQuantity
                             req.app.get( 'db' ).update_quantity( [newQuantity, req.params.id, order[0].id] )
-                        }).catch( err => { console.log('UPDATE CART QUANTITY ERROR', err) } )
+                        }).catch( err => { console.log( 'UPDATE CART QUANTITY ERROR', err) } )
                     }
                 })
             } 
@@ -44,7 +43,7 @@ module.exports = {
         .then( cartItems => {
             res.status( 200 ).json( cartItems )
         })
-        .catch( err => { console.log( 'Get Cart Pronblems!!', err ) } );
+        .catch( err => { console.log( 'GET CART ERROR', err ) } );
     },
     deleteFromCart: ( req, res ) => {
         req.app.get( 'db' ).find_active_order( [req.session.passport.user] )
@@ -58,7 +57,14 @@ module.exports = {
                 } else {
                     res.app.get( 'db' ).update_quantity( [newQuantity, req.params.id, order[0].id] )
                 }
-            }).catch( err => { console.log('UPDATE CART QUANTITY ERROR', err) } )
-        }).catch( err => { console.log('GET CART QUANTITY ERROR', err) } )
+            }).catch( err => { console.log( 'UPDATE CART QUANTITY ERROR', err ) } )
+            res.sendStatus( 200 )
+        }).catch( err => { console.log( 'GET CART QUANTITY ERROR', err ) } )
+    },
+    getUserInfo: ( req, res ) => {
+        req.app.get( 'db' ).get_user_info( [req.session.passport.user] )
+        .then( userInfo => {
+            res.status( 200 ).send( userInfo )
+        }).catch( err => { console.log('GET USER INFO ERROR', err ) } );
     }
 }

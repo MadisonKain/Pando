@@ -21,6 +21,7 @@ class Cart extends Component {
     }
 
     componentDidMount() {
+        
         this.updateCart();
     }
     
@@ -60,4 +61,4 @@ class Cart extends Component {
     }
 }
 
-export default Cart
+export default ( Cart )

@@ -4,7 +4,7 @@
     align-items: center;
 
 }
-.pageTitle{
+.shopTitle{
     display: flex;
     justify-content: center;
     align-items: center;
@@ -13,8 +13,14 @@
     background-color: #517698;
     width: 100%;
     border: solid 3px white;
-    margin-bottom: 20px;
     font-family: 'Roboto', sans-serif;
+}
+
+.searchBar{
+    width: 100vw;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
 
 @media( min-width:700px ){
