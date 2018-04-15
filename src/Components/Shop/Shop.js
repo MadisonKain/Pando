@@ -6,6 +6,7 @@ import './Shop.css';
 import IconButton from 'material-ui/IconButton';
 import Search from 'material-ui/svg-icons/action/search';
 
+
 class Shop extends Component {
     constructor() {
         super()
@@ -17,13 +18,16 @@ class Shop extends Component {
     }
 
     componentDidMount() {
+        this.getProducts();
+    }
+
+    getProducts(){
         axios.get( '/shop' ).then( ( response ) => {
             this.setState({
                 products: response.data
             })
         })
     }
-
 
     handleSearch(){
         console.log( 'hit' )
@@ -34,17 +38,23 @@ class Shop extends Component {
         this.setState({
             searchInput: e.target.value
         })
-        console.log( this.state.searchInput )
     }
 
 
     render() {
 
-        const product = this.state.products.map( item => (
+        let filteredProducts = this.state.products.filter(
+            ( product ) => {
+                return product.name.toLowerCase().indexOf( this.state.searchInput.toLowerCase() ) !== -1;
+            }
+        )
+
+        const product = filteredProducts.map( item => (
             <Product key={ item.id }
                 products={ item }
             />
         ))
+
 
         return (
             <div>
@@ -53,11 +63,13 @@ class Shop extends Component {
                 </div>
                 <div className='searchBar'>
                     <input 
-                        placeholder='Search' 
-                        onChange={ (e)=>{ this.updateSearchInput( e ) } }
+                        type="text"
+                        placeholder="Search"
+                        value={ this.state.searchInput } 
+                        onChange={ this.updateSearchInput.bind( this ) }
                     />
                     <IconButton>
-                        <Search onClick={ () => { this.handleSearch() } }/>
+                        <Search onClick={ () => { this.handleSearch.bind() } }/>
                     </IconButton>
                 </div>
                 <div className="shopContainer">
