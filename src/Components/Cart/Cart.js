@@ -21,7 +21,6 @@ class Cart extends Component {
     }
 
     componentDidMount() {
-        
         this.updateCart();
     }
     

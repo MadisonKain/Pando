@@ -5,6 +5,8 @@ import './Shop.css';
 
 import IconButton from 'material-ui/IconButton';
 import Search from 'material-ui/svg-icons/action/search';
+import DropDownMenu from 'material-ui/DropDownMenu';
+import MenuItem from 'material-ui/MenuItem';
 
 
 class Shop extends Component {
@@ -24,15 +26,16 @@ class Shop extends Component {
     getProducts(){
         axios.get( '/shop' ).then( ( response ) => {
             this.setState({
-                products: response.data
+                products: response.data,
+                value: 1
             })
         })
+
     }
 
     handleSearch(){
         console.log( 'hit' )
     }
-
 
     updateSearchInput( e ){
         this.setState({
@@ -40,12 +43,19 @@ class Shop extends Component {
         })
     }
 
+    handleChange = ( event, index, value ) => this.setState( { value } );
 
     render() {
 
         let filteredProducts = this.state.products.filter(
             ( product ) => {
-                return product.name.toLowerCase().indexOf( this.state.searchInput.toLowerCase() ) !== -1;
+                if( this.state.value === 1){
+                    return product.name.toLowerCase().indexOf( this.state.searchInput.toLowerCase() ) !== -1;
+                } else if ( this.state.value === 2){
+                    return product.username.toLowerCase().indexOf( this.state.searchInput.toLowerCase() ) !==-1;
+                } else {
+                    return product
+                }
             }
         )
 
@@ -56,12 +66,17 @@ class Shop extends Component {
         ))
 
 
+
         return (
             <div>
                 <div className='shopTitle'>
                     SHOP
                 </div>
                 <div className='searchBar'>
+                    <DropDownMenu value={ this.state.value } onChange={this.handleChange}>
+                        <MenuItem value={1} primaryText="Name" />
+                        <MenuItem value={2} primaryText="Artist" />
+                    </DropDownMenu>
                     <input 
                         type="text"
                         placeholder="Search"

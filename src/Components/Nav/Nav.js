@@ -5,6 +5,14 @@ import { getUserInfo } from '../../ducks/reducer';
 import { Link } from 'react-router-dom';
 
 import { AppBar, Popover, MenuItem, Menu } from 'material-ui';
+import Divider from 'material-ui/Divider';
+
+import Home from 'material-ui/svg-icons/action/home';
+import Store from 'material-ui/svg-icons/action/store';
+import LocalGroceryStore from 'material-ui/svg-icons/maps/local-grocery-store';
+import AccountCircle from 'material-ui/svg-icons/action/account-circle';
+import Clear from 'material-ui/svg-icons/content/clear';
+import Add from 'material-ui/svg-icons/content/add';
 
 
 class Nav extends Component {
@@ -43,20 +51,28 @@ class Nav extends Component {
             (
                 <div>
                     <a href='http://localhost:3000/#/cart'>
-                        <MenuItem primaryText="CART" />
+                        <MenuItem primaryText="CART" 
+                        leftIcon={ <LocalGroceryStore /> }
+                        />
                     </a>
                     <Link to={`/profile/${this.props.user.id}`}>
-                        <MenuItem primaryText='PROFILE' />
+                        <MenuItem primaryText='PROFILE'
+                        leftIcon={ <AccountCircle /> } 
+                        />
                     </Link>
                     <a href='http://localhost:3005/auth/logout'>
-                        <MenuItem primaryText="LOGOUT" />
+                        <MenuItem primaryText="LOGOUT" 
+                        leftIcon={ <Clear /> }
+                        />
                     </a>
                 </div>
             )
             :
             (
                 <a href='http://localhost:3005/auth'>
-                    <MenuItem primaryText="LOGIN" />
+                    <MenuItem primaryText="LOGIN" 
+                    leftIcon={ <Add /> }
+                    />
                 </a>
             );
 
@@ -77,12 +93,17 @@ class Nav extends Component {
                 >
                     <Menu>
                         <a href='http://localhost:3000/#/'>
-                            <MenuItem primaryText='HOME' />
+                            <MenuItem primaryText='HOME' 
+                            leftIcon={ <Home /> }
+                            />
                         </a>
                         <a href='http://localhost:3000/#/shop'>
-                            <MenuItem primaryText="SHOP" />
+                            <MenuItem primaryText="SHOP" 
+                            leftIcon={ <Store /> }
+                            />
                         </a>
                         {/* <MenuItem primaryText="FAVORITES" /> */}
+                        <Divider />
                         {userLoggedIn}
                     </Menu>
                 </Popover>
