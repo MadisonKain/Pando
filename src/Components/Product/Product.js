@@ -22,11 +22,14 @@ class Product extends Component {
     
 
     render() {
-        const { name, price, picture, id } = this.props.products;
+        const { name, price, picture, id, username } = this.props.products;
         return (
             <div className='productContainer'>
                 <div className="product">
                     { name }
+                </div>
+                <div>
+                    Created by: { username }
                 </div>
                 <Link to={`/product/${id}`}>
                     <img className="productPhoto" 

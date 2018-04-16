@@ -24,7 +24,7 @@ class Profile extends Component {
     
     render(){
         console.log( this.state.userInfo )
-        const { name, bio, profile_pic } = this.state.userInfo
+        const { username, bio, profile_pic } = this.state.userInfo
         return(
             <div>
                 <div>
@@ -33,7 +33,7 @@ class Profile extends Component {
                     />
                     <div>
                         <h1>
-                            { name }
+                            { username }
                         </h1>
                     </div>
                 </div>

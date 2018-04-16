@@ -1,15 +1,12 @@
 import axios from "axios";
 
-// initialize state
-
 const initialState = {
     user: {}
 };
 
-////////  the reason i make these strings into const variables is to take advantage of auto-complete
 const UPDATE_USER_INFO = "UPDATE_USER_INFO";
 
-//action creators//
+//========== ACTION CREATORS ==========//
 
 export function getUserInfo() {
     const userData = axios.get("/auth/me").then(res => {
@@ -21,7 +18,7 @@ export function getUserInfo() {
     };
 }
 
-//reducer function
+//========== REDUCER FUNCTION ==========//
 
 export default function reducer(state = initialState, action) {
     switch (action.type) {

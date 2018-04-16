@@ -39,7 +39,7 @@ class Nav extends Component {
 
     render() {
 
-        const userLoggedIn = !!this.props.user.name ?
+        const userLoggedIn = !!this.props.user.username ?
             (
                 <div>
                     <a href='http://localhost:3000/#/cart'>

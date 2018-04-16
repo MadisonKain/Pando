@@ -9,16 +9,17 @@ import { orange50 } from 'material-ui/styles/colors';
 
 
 class SelectedItem extends Component {
-    constructor(props) {
-        super(props)
+    constructor( props ) {
+        super( props )
         this.state = {
             product: []
         }
     }
 
     componentDidMount() {
-        axios.get(`/product/${this.props.match.params.id}`)
-            .then(item => {
+        console.log( this.props )
+        axios.get( `/product/${this.props.match.params.id}` )
+            .then( item => {
                 this.setState({
                     product: item.data
                 })
@@ -33,31 +34,30 @@ class SelectedItem extends Component {
         const { product } = this.state
         return (
             <div>
-                {product[0] &&
+                { product[0] &&
                     <div className='mainContainer'>
                         <div className='pageTitle'>
                             <IconButton onClick={() => { this.goBack() }}>
-                                <ArrowBack hoverColor={orange50} />
+                                <ArrowBack hoverColor={ orange50 } />
                             </IconButton>
-                            {product[0].name}
+                            { product[0].name }
                         </div>
                         <img className='productPhoto'
-                            src={product[0].picture} />
+                            src={ product[0].picture } />
                         <div className='selectedInfoContainer'>
                             <div className='itemInfo'>
-                                {product[0].description}
+                                { product[0].description }
                             </div>
                             <div className='itemInfo'>
-                                ${product[0].price}
+                                ${ product[0].price }
                                 <div>
                                     <IconButton>
-                                        <AddShoppingCart hoverColor={deepOrange400} />
+                                        <AddShoppingCart hoverColor={ deepOrange400 } />
                                     </IconButton>
                                 </div>
                             </div>
                         </div>
-
-                    </div>}
+                    </div> }
             </div>
         )
     }

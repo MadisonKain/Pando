@@ -3,13 +3,13 @@ module.exports = {
        req.app.get( 'db' ).getAllProducts()
        .then( products => {
            res.status( 200 ).send( products )
-       })
+       }).catch( err => { console.log("GET ALL PRODUCTS ERROR", err ) } );
     },
     getSelectedItem: ( req, res ) => {
         req.app.get( 'db' ).getSelectedItem( [req.params.id] )
         .then( product => {
             res.status( 200 ).send( product )
-        })
+        }).catch( err => { console.log('GET SELECTED ITEM ERROR', err ) } );
     },
     addToCart: ( req, res ) => {
         req.app.get( 'db' ).find_active_order( [req.session.passport.user] )

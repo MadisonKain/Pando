@@ -69,7 +69,7 @@ class Shop extends Component {
                         onChange={ this.updateSearchInput.bind( this ) }
                     />
                     <IconButton>
-                        <Search onClick={ () => { this.handleSearch.bind() } }/>
+                        <Search onClick={ () => { this.handleSearch() } }/>
                     </IconButton>
                 </div>
                 <div className="shopContainer">
