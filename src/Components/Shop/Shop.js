@@ -14,8 +14,10 @@ class Shop extends Component {
         super()
         this.state = {
             products: [],
+            filteredProducts: [],
             searchShowing: false,
-            searchInput: ''
+            searchInput: '',
+            value: 1
         }
     }
 
@@ -27,6 +29,7 @@ class Shop extends Component {
         axios.get( '/shop' ).then( ( response ) => {
             this.setState({
                 products: response.data,
+                filteredProducts: response.data,
                 value: 1
             })
         })
@@ -34,7 +37,18 @@ class Shop extends Component {
     }
 
     handleSearch(){
-        console.log( 'hit' )
+        let newProducts = this.state.products.filter(
+            ( product ) => {
+                if( this.state.value === 1 ){
+                    return product.name.toLowerCase().indexOf( this.state.searchInput.toLowerCase() ) !== -1;
+                } else if ( this.state.value === 2 ){
+                    return product.username.toLowerCase().indexOf( this.state.searchInput.toLowerCase() ) !==-1;
+                }
+            }
+        )
+        this.setState({
+            filteredProducts: newProducts
+        })
     }
 
     updateSearchInput( e ){
@@ -47,25 +61,11 @@ class Shop extends Component {
 
     render() {
 
-        let filteredProducts = this.state.products.filter(
-            ( product ) => {
-                if( this.state.value === 1){
-                    return product.name.toLowerCase().indexOf( this.state.searchInput.toLowerCase() ) !== -1;
-                } else if ( this.state.value === 2){
-                    return product.username.toLowerCase().indexOf( this.state.searchInput.toLowerCase() ) !==-1;
-                } else {
-                    return product
-                }
-            }
-        )
-
-        const product = filteredProducts.map( item => (
+        const product = this.state.filteredProducts.map( item => (
             <Product key={ item.id }
                 products={ item }
             />
         ))
-
-
 
         return (
             <div>
@@ -73,11 +73,11 @@ class Shop extends Component {
                     SHOP
                 </div>
                 <div className='searchBar'>
-                    <DropDownMenu value={ this.state.value } onChange={this.handleChange}>
+                    <DropDownMenu value={ this.state.value } onChange={ this.handleChange }>
                         <MenuItem value={1} primaryText="Name" />
                         <MenuItem value={2} primaryText="Artist" />
                     </DropDownMenu>
-                    <input 
+                    <input
                         type="text"
                         placeholder="Search"
                         value={ this.state.searchInput } 
