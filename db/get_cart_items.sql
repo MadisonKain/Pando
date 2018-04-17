@@ -4,4 +4,5 @@ SELECT *
         ON OT.id = C.o_id
     JOIN Products as P
         ON P.id = C.p_id
-    WHERE OT.status = true;
+    WHERE OT.status = true
+    ORDER BY P.name ASC

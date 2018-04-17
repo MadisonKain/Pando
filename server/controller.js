@@ -66,5 +66,23 @@ module.exports = {
         .then( userInfo => {
             res.status( 200 ).send( userInfo )
         }).catch( err => { console.log('GET USER INFO ERROR', err ) } );
-    }
+    },
+    getCartTotal: ( req, res ) => {
+        res.app.get( 'db' ).find_active_order( [req.session.passport.user] )
+        .then( order => {
+        req.app.get( 'db' ).get_cart_and_products( [order[0].id] )
+        .then( response => {
+            let newTotal = response.reduce( ( accumulator, item ) => {
+               return accumulator + (item.quantity * item.price)
+            }, 0 )
+            req.app.get( 'db' ).update_order_total( [newTotal, order[0].id] )
+            .then( total => {
+                res.status( 200 ).send( total[0] )
+            })
+        })
+        }) 
+    },
+    postNewProduct: ( req, res ) => {
+        db = req.app.get( 'db' )
+    } 
 }

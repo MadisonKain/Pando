@@ -15,45 +15,52 @@ class Cart extends Component {
     constructor() {
         super()
         this.state = {
-            cartItems: []
+            cartItems: [],
+            total: 0
         }
-        this.updateCart = this.updateCart.bind(this);
+        this.updateCart = this.updateCart.bind( this );
     }
 
     componentDidMount() {
         this.updateCart();
+        this.getOrderTotal();
     }
     
     updateCart(){
-        axios.get( '/cart' )
-            .then(response => {
+        axios.get( '/cart' ).then( response => {
                 this.setState({
                     cartItems: response.data
                 })
             })
     }
 
-    goBack(){
-        this.props.history.goBack();
+    getOrderTotal(){
+        axios.get( '/cart/total' ).then( response => {
+            console.log( response.data )
+                this.setState({
+                    total: response.data.total
+                })
+            })
     }
 
     render() {
-        const product = this.state.cartItems.map(item => {
-            return <CartItem key={item.id}
-                products={item} 
-                updateCart={this.updateCart}/>
+
+        const product = this.state.cartItems.map( item => {
+            return <CartItem key={ item.id }
+                products={ item } 
+                updateCart={ this.updateCart }/>
         })
-        console.log(product)
+
         return (
             <div>
                 <div className='pageTitle'>
-                    <IconButton onClick={ () => { this.goBack() } }>
-                        <ArrowBack hoverColor={orange50} />
-                    </IconButton>
                     MY CART
                 </div>
                 <div>
-                    {product}
+                    <h1>
+                        TOTAL: { this.state.total }
+                    </h1>
+                    { product }
                 </div>
             </div>
         )

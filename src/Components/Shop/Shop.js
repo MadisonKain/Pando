@@ -7,6 +7,7 @@ import IconButton from 'material-ui/IconButton';
 import Search from 'material-ui/svg-icons/action/search';
 import DropDownMenu from 'material-ui/DropDownMenu';
 import MenuItem from 'material-ui/MenuItem';
+import Clear from 'material-ui/svg-icons/content/clear';
 
 
 class Shop extends Component {
@@ -83,9 +84,15 @@ class Shop extends Component {
                         value={ this.state.searchInput } 
                         onChange={ this.updateSearchInput.bind( this ) }
                     />
+                    <div>
                     <IconButton>
                         <Search onClick={ () => { this.handleSearch() } }/>
                     </IconButton>
+                    <IconButton>
+                        <Clear onClick={ () => { this.getProducts() } } />
+                    </IconButton>
+
+                    </div>
                 </div>
                 <div className="shopContainer">
                     { product }
