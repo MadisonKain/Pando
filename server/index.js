@@ -5,7 +5,9 @@ const bodyParser = require( 'body-parser' );
 const massive = require( 'massive' );
 const passport = require( 'passport' );
 const Auth0Strategy = require( 'passport-auth0' );
-const pc = require( './controller' )
+const pc = require( './controller' );
+const cors = require('cors');
+const S3 = require( './S3' );
 
 const {
    SERVER_PORT,
@@ -20,7 +22,10 @@ const {
 
 const app = express();
 
-app.use( bodyParser.json() );
+app.use(cors())
+app.use( bodyParser.json( { limit: '50MB' } ))
+
+S3(app)
 
 // app.use( ( req, res, next ) => {
 //     if( DEV_MODE ){
@@ -118,6 +123,8 @@ app.get( '/cart/total', pc.getCartTotal );
 app.post( '/cart/add/:id', pc.addToCart );
 
 app.post( '/profile/newProduct', pc.postNewProduct );
+
+app.put( '/profile/edit', pc.updateProfileInfo );
 
 app.delete( '/cart/delete/:id', pc.deleteFromCart );
 

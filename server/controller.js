@@ -84,5 +84,18 @@ module.exports = {
     },
     postNewProduct: ( req, res ) => {
         db = req.app.get( 'db' )
+        const { name, medium, description, price, user_id, picture } = req.body;
+        db.create_new_product( [name, medium, description, price, user_id, picture] )
+        .then( response => {
+            res.sendStatus( 200 )
+        })
+    },
+    updateProfileInfo: ( req, res ) => {
+        db = req.app.get( 'db' )
+        const { name, bio, user_id } = req.body
+        db.update_profile_info( [name, bio, user_id] )
+        .then( response => {
+            res.sendStatus( 200 );
+        })
     } 
 }
