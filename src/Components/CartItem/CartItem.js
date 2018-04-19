@@ -21,6 +21,7 @@ class CartItem extends Component {
         axios.delete( `/cart/delete/${this.props.products.id}` ).then( () => {
             this.props.updateCart()
         })
+        window.location.reload();
     }
 
     render(){

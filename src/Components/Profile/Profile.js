@@ -103,6 +103,7 @@ class Profile extends Component {
                 editOpen: false
             })
         })
+        window.location.reload();
     }
 
     handleSubmitAll(){

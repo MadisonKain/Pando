@@ -6,6 +6,7 @@ import AddShoppingCart from 'material-ui/svg-icons/action/add-shopping-cart';
 import { deepOrange400 } from 'material-ui/styles/colors';
 import ArrowBack from 'material-ui/svg-icons/navigation/arrow-back';
 import { orange50 } from 'material-ui/styles/colors';
+import { Link } from "react-router-dom";
 
 
 class SelectedItem extends Component {
@@ -17,17 +18,13 @@ class SelectedItem extends Component {
     }
 
     componentDidMount() {
-        console.log( this.props )
+        // console.log( this.props )
         axios.get( `/product/${this.props.match.params.id}` )
             .then( item => {
                 this.setState({
                     product: item.data
                 })
             })
-    }
-
-    goBack(){
-        this.props.history.goBack();
     }
 
     render() {
@@ -37,11 +34,13 @@ class SelectedItem extends Component {
                 { product[0] &&
                     <div className='mainContainer'>
                         <div className='pageTitle'>
-                            <IconButton onClick={() => { this.goBack() }}>
-                                <ArrowBack hoverColor={ orange50 } />
-                            </IconButton>
                             { product[0].name }
                         </div>
+                        <Link to={`/artist/${product[0].user_id}`}>
+                            <h1>
+                                { product[0].username }
+                            </h1>
+                        </Link>
                         <img className='productPhoto'
                             src={ product[0].picture } />
                         <div className='selectedInfoContainer'>

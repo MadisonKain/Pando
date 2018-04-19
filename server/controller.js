@@ -97,5 +97,13 @@ module.exports = {
         .then( response => {
             res.sendStatus( 200 );
         })
-    } 
+    },
+    getArtistInfo: ( req, res ) => {
+        db = req.app.get( 'db' )
+        const { id } = req.params;
+        db.getSelectedItem( [id] )
+        .then( response => {
+            res.status( 200 ).send( response[0] )
+        }).catch( err => { console.log( 'GET ARTIST INTO ERROR', err) } );
+    }
 }

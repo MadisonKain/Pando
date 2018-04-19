@@ -8,6 +8,7 @@ import Cart from './Components/Cart/Cart';
 import Landing from './Components/Landing/Landing';
 import SelectedItem from './Components/SelectedItem/SelectedItem';
 import Profile from './Components/Profile/Profile';
+import ArtistProfile from './Components/ArtistProfile/ArtistProfile';
 
 // ========== ========== ========== //
 
@@ -18,6 +19,6 @@ export default(
         <Route component={ Cart } path='/cart'/>
         <Route component={ SelectedItem } path='/product/:id'/>
         <Route component={ Profile } path='/profile/:id'/>
-
+        <Route component={ ArtistProfile } path='/artist/:id'/>
     </Switch>
 )

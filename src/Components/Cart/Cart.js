@@ -10,7 +10,6 @@ import { deepOrange400 } from 'material-ui/styles/colors';
 import { orange50 } from 'material-ui/styles/colors';
 
 
-
 class Cart extends Component {
     constructor() {
         super()
@@ -36,7 +35,7 @@ class Cart extends Component {
 
     getOrderTotal(){
         axios.get( '/cart/total' ).then( response => {
-            console.log( response.data )
+            // console.log( response.data )
                 this.setState({
                     total: response.data.total
                 })

@@ -120,6 +120,8 @@ app.get( '/profile/:id', pc.getUserInfo );
 
 app.get( '/cart/total', pc.getCartTotal );
 
+app.get( '/artist/:id', pc.getArtistInfo );
+
 app.post( '/cart/add/:id', pc.addToCart );
 
 app.post( '/profile/newProduct', pc.postNewProduct );
