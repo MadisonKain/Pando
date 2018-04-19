@@ -50,17 +50,17 @@ class Nav extends Component {
         const userLoggedIn = !!this.props.user.username ?
             (
                 <div>
-                    <a href='http://localhost:3000/#/cart'>
+                    <Link to='/cart'>
                         <MenuItem primaryText="CART" 
                         leftIcon={ <LocalGroceryStore /> }
                         />
-                    </a>
+                    </Link>
                     <Link to={`/profile/${this.props.user.id}`}>
                         <MenuItem primaryText='PROFILE'
                         leftIcon={ <AccountCircle /> } 
                         />
                     </Link>
-                    <a href='http://localhost:3005/auth/logout'>
+                    <a href={ process.env.REACT_APP_LOGOUT }>
                         <MenuItem primaryText="LOGOUT" 
                         leftIcon={ <Clear /> }
                         />
@@ -69,7 +69,7 @@ class Nav extends Component {
             )
             :
             (
-                <a href='http://localhost:3005/auth'>
+                <a href={ process.env.REACT_APP_LOGIN }>
                     <MenuItem primaryText="LOGIN" 
                     leftIcon={ <Add /> }
                     />
@@ -92,16 +92,16 @@ class Nav extends Component {
                     onRequestClose={this.handleRequestClose}
                 >
                     <Menu>
-                        <a href='http://localhost:3000/#/'>
+                        <Link to='/'>
                             <MenuItem primaryText='HOME' 
                             leftIcon={ <Home /> }
                             />
-                        </a>
-                        <a href='http://localhost:3000/#/shop'>
+                        </Link>
+                        <Link to='/shop'>
                             <MenuItem primaryText="SHOP" 
                             leftIcon={ <Store /> }
                             />
-                        </a>
+                        </Link>
                         {/* <MenuItem primaryText="FAVORITES" /> */}
                         <Divider />
                         {userLoggedIn}
