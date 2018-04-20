@@ -9,6 +9,7 @@ const pc = require( './controller' );
 const cors = require('cors');
 const S3 = require( './S3' );
 
+
 const {
    SERVER_PORT,
    CONNECTION_STRING,
@@ -127,6 +128,8 @@ app.get( '/artist/:id', pc.getArtistInfo );
 app.post( '/cart/add/:id', pc.addToCart );
 
 app.post( '/profile/newProduct', pc.postNewProduct );
+
+app.post( '/api/payment', pc.stripe );
 
 app.put( '/profile/edit', pc.updateProfileInfo );
 

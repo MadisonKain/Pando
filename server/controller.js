@@ -1,4 +1,24 @@
+require('dotenv').config();
+const stripe = require('stripe')(process.env.S_STRIPE_KEY)
+
 module.exports = {
+    stripe: ( req, res ) => {
+        const db = req.app.get( 'db' );
+        const charge = stripe.charges.create({
+            amount: req.body.total,
+            currency: 'usd',
+            source: req.body.token.id,
+            description: 'Test Charge for WITTY ART TITLE'
+        }
+        // , function(err, charge){
+        //     if (err) return res.sendStatus( 500 )
+        //     return res.sendStatus( 200 );}
+        )
+        db.change_active_order( [req.session.passport.user] )
+        .then( response => {
+            res.sendStatus( 200 )
+        })
+    },
     getAllProducts: ( req, res ) => {
        req.app.get( 'db' ).getAllProducts()
        .then( products => {
@@ -101,9 +121,9 @@ module.exports = {
     getArtistInfo: ( req, res ) => {
         db = req.app.get( 'db' )
         const { id } = req.params;
-        db.getSelectedItem( [id] )
+        db.get_artist_info( [id] )
         .then( response => {
-            res.status( 200 ).send( response[0] )
+            res.status( 200 ).send( response )
         }).catch( err => { console.log( 'GET ARTIST INTO ERROR', err) } );
     }
 }

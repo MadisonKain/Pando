@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import axios from 'axios';
 import CartItem from '../CartItem/CartItem';
 import './Cart.css';
+import Checkout from '../Checkout/Checkout';
 
 
 import { IconButton } from 'material-ui';
@@ -60,6 +61,9 @@ class Cart extends Component {
                         TOTAL: { this.state.total }
                     </h1>
                     { product }
+                    <Checkout 
+                        total={ this.state.total * 100 }
+                    />
                 </div>
             </div>
         )
