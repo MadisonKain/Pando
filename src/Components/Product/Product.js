@@ -9,47 +9,36 @@ import { deepOrange400 } from 'material-ui/styles/colors';
 
 
 class Product extends Component {
-    constructor( props ) {
-        super( props )
+    constructor(props) {
+        super(props)
         this.state = {
-            
+
         }
     }
 
-    handleClick(){
-        axios.post( `/cart/add/${this.props.products.id}` )
+    handleClick() {
+        axios.post(`/cart/add/${this.props.products.id}`)
     }
-    
+
 
     render() {
         const { name, price, picture, id, username } = this.props.products;
         return (
-            <div className='productContainer'>
-                <div className="product">
-                    { name }
-                </div>
-                <div>
-                    Created by: { username }
-                </div>
-                <Link to={`/product/${id}`}>
-                    <img className="productPhoto" 
-                         src={ picture }
-                    />
-                </Link>
-                <div className="product">
-                    <div>
-                        ${ price }
+                <div className="card mr-5 mb-5 mt-5" id="maximum-width">
+                    <img className="card-img-top" src={ picture } alt="FOR SALE ITEM"/>
+                    <div className="card-body">
+                        <h5 className="card-title">{ name }</h5>
                     </div>
-                    <IconButton>
-                        <AddShoppingCart hoverColor={ deepOrange400 }
-                                         onClick={ e => { this.handleClick() } }
-                        />
-                    </IconButton>
-                </div>
-
-            </div>
-        )
+                    <div className="card-footer">
+                        <Link to={ `/product/${id}` } className="btn">
+                            <div style={{ color: "#19B29C" }}>
+                                Buy
+                            </div>
+                        </Link>
+                    </div>
+                </div> 
+            )
+        }
     }
-}
-
+                
 export default Product

@@ -4,9 +4,13 @@
     align-items: center;
     color: white;
     height: 50px;
-    background-color: #517698;
+    background-color: #FFD22D;
     width: 100%;
     border: solid 3px white;
     margin-bottom: 20px;
     font-family: 'Roboto', sans-serif;
+}
+
+.landing-container-2{
+    height: 50vh;
 }

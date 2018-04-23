@@ -1,36 +1,58 @@
-.pageTitle{
+/* .product-title{
     display: flex;
     justify-content: center;
     align-items: center;
-    color: white;
-    height: 50px;
-    background-color: #517698;
+    height: 60px;
+    background-color: #FFD22D;
     width: 100%;
     border: solid 3px white;
-    font-family: 'Roboto', sans-serif;
+    color: white;
+    font-size: 30px;
+} */
+
+@import url('https://fonts.googleapis.com/css?family=Cutive+Mono');
+
+#maximum-height{
+    max-height: 350px;
 }
-.selectedInfoContainer{
-    padding: 20px;
+.created-by{
+    font-size: 20px;
+    font-family: "Libre Baskerville", serif;
+}
+.img-circle{
+    height: auto;
+    width: 100px;
+    margin-right: 20px;
+}
+.container-number-2{
+    margin-right: 40px;
+    margin-left: 40px;
     display: flex;
     flex-direction: column;
-    width: 80%;
     justify-content: center;
     align-items: center;
-    border: solid 3px #517698;
-    border-radius: 30px;
-    margin: 10px;
+    background-color: #f9f9f9;
+    padding: 10px;
+    border-radius: 5px;
 }
-.itemInfo{
-    margin: 10px;
-    word-wrap: break-word;
-    width: 100%;
-}
-.productPhoto{
-    width: 80%;
-}
-.mainContainer{
+.main-shop-container{
     display: flex;
-    flex-direction: column;
-    width: 100%;
+    justify-content: space-between;
     align-items: center;
+    background-color: white;
+    height: 600px;
+    border-radius: 5px;
+}
+.photo-container{
+    margin-left: 40px;
+}
+.top-container{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 20px;
+    margin-top: 20px;
+}
+.right-container-item{
+    margin-bottom: 20px;
 }

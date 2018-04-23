@@ -6,14 +6,16 @@ class Checkout extends Component {
     constructor() {
         super()
         this.state = {
-
+            
         }
     }
 
     onToken = ( token ) => {
         token.card = void 0;
         axios.post( '/api/payment', { token, amount: this.props.total }  )
-        .then( response => {} )
+        .then( response => {
+            window.location.reload();
+        } )
     }
 
     render() {
