@@ -4,16 +4,6 @@ import { connect } from 'react-redux';
 import { getUserInfo } from '../../ducks/reducer';
 import { Link } from 'react-router-dom';
 
-import { AppBar, Popover, MenuItem, Menu } from 'material-ui';
-import Divider from 'material-ui/Divider';
-
-import Home from 'material-ui/svg-icons/action/home';
-import Store from 'material-ui/svg-icons/action/store';
-import LocalGroceryStore from 'material-ui/svg-icons/maps/local-grocery-store';
-import AccountCircle from 'material-ui/svg-icons/action/account-circle';
-import Clear from 'material-ui/svg-icons/content/clear';
-import Add from 'material-ui/svg-icons/content/add';
-
 
 class Nav extends Component {
     constructor(props) {
@@ -23,91 +13,55 @@ class Nav extends Component {
         }
     }
 
-
-
     componentDidMount() {
         this.props.getUserInfo()
     }
 
-
-
-    handleClick = (event) => {
-        event.preventDefault();
-        this.setState({
-            open: true,
-            anchorEl: event.currentTarget,
-        });
-    };
-
-    handleRequestClose = () => {
-        this.setState({
-            open: false,
-        });
-    };
-
     render() {
 
-        const userLoggedIn = !!this.props.user.username ?
+        const userLoggedIn = this.props.user.username ?
             (
-                <div>
-                    <Link to='/cart'>
-                        <MenuItem primaryText="CART" 
-                        leftIcon={ <LocalGroceryStore /> }
-                        />
+                <nav className="navbar navbar-expand-lg navbar-light" id="navigation-bar">
+                    <Link className="navbar-brand" to="/" style={{ color: "white" }}>
+                        P A N D O
                     </Link>
-                    <Link to={`/profile/${this.props.user.id}`}>
-                        <MenuItem primaryText='PROFILE'
-                        leftIcon={ <AccountCircle /> } 
-                        />
-                    </Link>
-                    <a href={ process.env.REACT_APP_LOGOUT }>
-                        <MenuItem primaryText="LOGOUT" 
-                        leftIcon={ <Clear /> }
-                        />
-                    </a>
-                </div>
+                    <button className="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarText" aria-controls="navbarText" aria-expanded="false" aria-label="Toggle navigation">
+                        <span className="navbar-toggler-icon"></span>
+                    </button>
+                    <div className="collapse navbar-collapse d-flex justify-content-end" id="navbarNavAltMarkup">
+                        <div className="navbar-nav">
+                            <Link className="nav-item nav-link" to="/" style={{ color: "white" }}>| H O M E |<span className="sr-only">(current)</span></Link>
+                            <Link className="nav-item nav-link" to="/shop" style={{ color: "white" }}>| S H O P |</Link>
+                            <Link to={`/profile/${this.props.user.id}`} className="nav-item nav-link" style={{ color: "white" }}>| P R O F I L E |</Link>
+                            <Link to="/cart" className="nav-item nav-link" style={{ color: "white" }}>| C A R T |</Link>
+                            <a href={process.env.REACT_APP_LOGOUT} className="nav-item nav-link" style={{ color: "white" }}>| L O G O U T |</a>
+                        </div>
+                    </div>
+                </nav>
             )
             :
             (
-                <a href={ process.env.REACT_APP_LOGIN }>
-                    <MenuItem primaryText="LOGIN" 
-                    leftIcon={ <Add /> }
-                    />
-                </a>
-            );
-
+                <nav className="navbar navbar-expand-lg navbar-light" id="navigation-bar">
+                    <Link className="navbar-brand" to="/" style={{ color: "white" }}>
+                        P A N D O
+                    </Link>
+                    <button className="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarText" aria-controls="navbarText" aria-expanded="false" aria-label="Toggle navigation">
+                        <span className="navbar-toggler-icon"></span>
+                    </button>
+                    <div className="collapse navbar-collapse d-flex justify-content-end" id="navbarNavAltMarkup">
+                        <div className="navbar-nav">
+                            <Link className="nav-item nav-link" to="/" style={{ color: "white" }}>| H O M E |<span className="sr-only">(current)</span></Link>
+                            <Link className="nav-item nav-link" to="/shop" style={{ color: "white" }}>| S H O P |</Link>
+                            <a href={process.env.REACT_APP_LOGIN} className="nav-item nav-link" style={{ color: "white" }}>| L O G I N |</a>
+                        </div>
+                    </div>
+                </nav>
+            )
 
         return (
-            <div>
-                <AppBar
-                    title="WITTY ART TITLE"
-                    className="nav"
-                    onLeftIconButtonClick={this.handleClick}
-                />
-                <Popover
-                    open={this.state.open}
-                    anchorEl={this.state.anchorEl}
-                    anchorOrigin={{ horizontal: 'left', vertical: 'bottom' }}
-                    targetOrigin={{ horizontal: 'left', vertical: 'top' }}
-                    onRequestClose={this.handleRequestClose}
-                >
-                    <Menu>
-                        <Link to='/'>
-                            <MenuItem primaryText='HOME' 
-                            leftIcon={ <Home /> }
-                            />
-                        </Link>
-                        <Link to='/shop'>
-                            <MenuItem primaryText="SHOP" 
-                            leftIcon={ <Store /> }
-                            />
-                        </Link>
-                        {/* <MenuItem primaryText="FAVORITES" /> */}
-                        <Divider />
-                        {userLoggedIn}
-                    </Menu>
-                </Popover>
-            </div >
+            <div className="akbar-position">
+                { userLoggedIn }
+            </div>
         )
     }
 }

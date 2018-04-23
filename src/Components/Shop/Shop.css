@@ -1,31 +1,35 @@
-.shopContainer{
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-}
 .shopTitle{
     display: flex;
     justify-content: center;
     align-items: center;
-    color: white;
-    height: 50px;
-    background-color: #517698;
+    height: 60px;
+    background-color: #FFD22D;
     width: 100%;
     border: solid 3px white;
-    font-family: 'Roboto', sans-serif;
 }
 
 .searchBar{
+    top: 68px;
+    left: 0;
+    position: fixed;
     width: 100vw;
     display: flex;
+    background-color: #FFD22D;
     justify-content: center;
     align-items: center;
-    height: 80px;
+    height: 70px;
+    border-radius: 10px;
+    z-index: 1;
 }
 
-@media( min-width:700px ){
-    .shopContainer{
-        flex-direction: row;
-        margin: 20px;
-    }
+.shopStuff{
+    background-image: url('https://wallpaperstock.net/wallpapers/thumbs1/45454hd.jpg');
+    height: 100vh;
+    background-attachment: fixed;
+    background-repeat: no-repeat;
+    background-size: cover;
+    overflow: auto;
+}
+#moreShopStuff{
+    margin-top: 150px;
 }

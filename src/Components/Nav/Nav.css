@@ -1,27 +1,67 @@
-.nav{
+/* .nav{
     margin: 0 auto !important;
     background-color: #FF7043 !important;
     height: 65px;
     width: 100vw;
-}
+} */
 
-a:link {
+/* a:link {
     text-decoration: none;
-    color: black;
+    color: white;
  }
  
  a:visited {
     text-decoration: none;
-    color: black;    
+    color: white;    
  }
  
  a:hover {
     text-decoration: none;
-    color: black;
+    color: white;
     cursor: pointer;
  }
  
  a:active {
     text-decoration: none;
-    color: black;    
+    color: white;    
+ } */
+
+ @import url('https://fonts.googleapis.com/css?family=Cutive+Mono');
+
+ /* .navbar{
+     background-color: #19B29C;
+     height: 50px;
+     color: white;
+     font-family: 'Cutive Mono', monospace;
+     height: 110px;
+ } */
+ /* .nav-title{
+    font-size: 50px;
  }
+ .title-container{
+     display: flex;
+     justify-content: center;
+     align-items: center;
+     flex-direction: column;
+     width: 300px;
+     height: 135px;
+ }
+ .links{
+     display: flex;
+     width: 300px;
+     justify-content: space-evenly;
+ }
+ .link{
+     border: white 5;
+ } */
+
+ 
+ #navigation-bar{
+     background-color: #19B29C;
+     margin-bottom: 0; 
+ }
+ .akbar-position{
+    position: fixed !important;
+    width: 100%;
+    z-index: 1;
+}

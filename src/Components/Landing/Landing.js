@@ -1,10 +1,11 @@
 import React from 'react';
 import './Landing.css';
+import { Navbar } from 'react-bootstrap/lib'
 
-function Landing(){
-    return(
+function Landing() {
+    return (
         <div>
-            <div className='pageTitle'>HOME</div>
+        
         </div>
     )
 }

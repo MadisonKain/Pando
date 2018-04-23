@@ -3,6 +3,8 @@ import axios from 'axios';
 import CartItem from '../CartItem/CartItem';
 import './Cart.css';
 import Checkout from '../Checkout/Checkout';
+import { connect } from 'react-redux';
+import { getUserInfo } from '../../ducks/reducer';
 
 
 import { IconButton } from 'material-ui';
@@ -12,8 +14,8 @@ import { orange50 } from 'material-ui/styles/colors';
 
 
 class Cart extends Component {
-    constructor() {
-        super()
+    constructor( props ) {
+        super( props )
         this.state = {
             cartItems: [],
             total: 0
@@ -45,29 +47,48 @@ class Cart extends Component {
 
     render() {
 
+        console.log( 'THIS.PROPS.USER', this.props.user )
+
         const product = this.state.cartItems.map( item => {
             return <CartItem key={ item.id }
                 products={ item } 
                 updateCart={ this.updateCart }/>
         })
+        
+        const cartData = (this.state.total === 0) 
+        ?
+            <div>
+                Check out our artists, and buy some art!
+            </div>
+        :
+        <div>
+            <div className='pageTitle'>
+                MY CART
+            </div>
+            <div>
+                <h1>
+                    TOTAL: { this.state.total }
+                </h1>
+                { product }
+                <Checkout 
+                    total={ this.state.total * 100 }
+                />
+            </div>
+        </div>
+
 
         return (
             <div>
-                <div className='pageTitle'>
-                    MY CART
-                </div>
-                <div>
-                    <h1>
-                        TOTAL: { this.state.total }
-                    </h1>
-                    { product }
-                    <Checkout 
-                        total={ this.state.total * 100 }
-                    />
-                </div>
+                { cartData }
             </div>
         )
     }
 }
 
-export default ( Cart )
+function mapStateToProps(state) {
+    return {
+        user: state.user
+    }
+}
+
+export default connect(mapStateToProps, { getUserInfo })( Cart )

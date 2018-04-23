@@ -9,6 +9,8 @@ import DropDownMenu from 'material-ui/DropDownMenu';
 import MenuItem from 'material-ui/MenuItem';
 import Clear from 'material-ui/svg-icons/content/clear';
 
+import { grey50 } from 'material-ui/styles/colors';
+
 
 class Shop extends Component {
     constructor() {
@@ -51,7 +53,7 @@ class Shop extends Component {
             filteredProducts: newProducts
         })
     }
-
+  
     updateSearchInput( e ){
         this.setState({
             searchInput: e.target.value
@@ -69,13 +71,11 @@ class Shop extends Component {
         ))
 
         return (
-            <div>
+            <div className="shopStuff">
                 <div className='shopTitle'>
-                    SHOP
-                </div>
                 <div className='searchBar'>
                     <DropDownMenu value={ this.state.value } onChange={ this.handleChange }>
-                        <MenuItem value={1} primaryText="Name" />
+                        <MenuItem value={1} primaryText="Title" />
                         <MenuItem value={2} primaryText="Artist" />
                     </DropDownMenu>
                     <input
@@ -86,16 +86,21 @@ class Shop extends Component {
                     />
                     <div>
                     <IconButton>
-                        <Search onClick={ () => { this.handleSearch() } }/>
+                        <Search color={ grey50 } onClick={ () => { this.handleSearch() } }/>
                     </IconButton>
                     <IconButton>
-                        <Clear onClick={ () => { this.getProducts() } } />
+                        <Clear color={ grey50 } onClick={ () => { this.getProducts() } } />
                     </IconButton>
 
                     </div>
                 </div>
-                <div className="shopContainer">
-                    { product }
+                </div>
+                <div className="container">
+                    <div className="row" id="wider">
+                        <div className="row d-flex justify-content-center" id="moreShopStuff">
+                            { product }
+                        </div>
+                    </div>
                 </div>
             </div>
         )
