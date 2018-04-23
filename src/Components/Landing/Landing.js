@@ -4,8 +4,10 @@ import { Navbar } from 'react-bootstrap/lib'
 
 function Landing() {
     return (
-        <div>
-        
+        <div className="container">
+            <h1 className="landingTitle" id="moreShopStuff">
+                WELCOME
+            </h1>
         </div>
     )
 }

@@ -3,9 +3,7 @@ import axios from 'axios';
 import './SelectedItem.css';
 import { IconButton } from 'material-ui';
 import AddShoppingCart from 'material-ui/svg-icons/action/add-shopping-cart';
-import { deepOrange400 } from 'material-ui/styles/colors';
-import ArrowBack from 'material-ui/svg-icons/navigation/arrow-back';
-import { orange50, amber500 } from 'material-ui/styles/colors';
+import { amber500 } from 'material-ui/styles/colors';
 import { Link } from "react-router-dom";
 
 

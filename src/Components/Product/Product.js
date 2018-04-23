@@ -29,12 +29,15 @@ class Product extends Component {
                     <div className="card-body">
                         <h5 className="card-title">{ name }</h5>
                     </div>
-                    <div className="card-footer">
+                    <div className="card-footer" id="fix-footer">
                         <Link to={ `/product/${id}` } className="btn">
                             <div style={{ color: "#19B29C" }}>
                                 Buy
                             </div>
                         </Link>
+                        <div>
+                            ${ price }
+                        </div>
                     </div>
                 </div> 
             )
