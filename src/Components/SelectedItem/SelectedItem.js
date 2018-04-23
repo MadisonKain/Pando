@@ -26,37 +26,13 @@ class SelectedItem extends Component {
             })
     }
 
+    handleClick() {
+        axios.post(`/cart/add/${this.state.product[0].id}`)
+    }
+
     render() {
         const { product } = this.state
         return (
-            // <div>
-            //     { product[0] &&
-            //         <div className="">
-            //             {/* <div className="product-title">
-            //                 { product[0].name }
-            //             </div> */}
-            //             <Link to={`/artist/${product[0].user_id}`}>
-            //                 <h1>
-            //                     { product[0].username }
-            //                 </h1>
-            //             </Link>
-            //             <img className=''
-            //                 src={ product[0].picture } />
-            //             <div className=''>
-            //                 <div className=''>
-            //                     { product[0].description }
-            //                 </div>
-            //                 <div className=''>
-            //                     ${ product[0].price }
-            //                     <div>
-            //                         <IconButton>
-            //                             <AddShoppingCart hoverColor={ amber500 } />
-            //                         </IconButton>
-            //                     </div>
-            //                 </div>
-            //             </div>
-            //         </div> }
-            // </div>
             <div className="container">
                 { product[0] &&
                 <div id="moreShopStuff" className="main-shop-container">
@@ -64,12 +40,24 @@ class SelectedItem extends Component {
                         <img id="maximum-height" src={ product[0].picture }/>
                     </div>
                     <div className="container-number-2">
+                        <h4 className="">{ product[0].name }</h4>
                         <div className="top-container">
                             <img className="img-circle" src={ product[0].profile_pic }/>
-                            <div className="right-container-item">Created By: { product[0].username }</div>
+                            <div className="right-container-item">{`Artist: `}
+                                <Link to={`/artist/${product[0].user_id}`}>
+                                    <strong>
+                                        @{ product[0].username }
+                                    </strong>
+                                </Link>
+                            </div>
                         </div>
                         <div className="right-container-item">{ product[0].description }</div>
-                        <div>{  }</div>
+                        <div className="top-container" id="no-top-margin">
+                            <div>${ product[0].price }</div>
+                            <IconButton>
+                                <AddShoppingCart hoverColor={ amber500 } onClick={ () => { this.handleClick() } } />
+                            </IconButton>
+                        </div>
                     </div>
                     </div>
                 }

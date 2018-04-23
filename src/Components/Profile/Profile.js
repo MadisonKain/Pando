@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import axios from "axios";
 import './Profile.css';
+import Product from '../Product/Product';
 
 // ========== MATERIAL-UI IMPORTS =========== //
 
@@ -9,6 +10,8 @@ import RaisedButton from 'material-ui/RaisedButton';
 import FlatButton from 'material-ui/FlatButton';
 import TextField from 'material-ui/TextField';
 import { orange500 } from 'material-ui/styles/colors';
+import FloatingActionButton from 'material-ui/FloatingActionButton';
+import ContentAdd from 'material-ui/svg-icons/content/add';
 
 
 
@@ -17,6 +20,7 @@ class Profile extends Component {
         super()
         this.state = {
             userInfo: {},
+            artistInfo: [],
             open: false,
             editOpen: false,
             productName: "",
@@ -40,6 +44,7 @@ class Profile extends Component {
 
     componentDidMount(){
         this.getUserInfo()
+        this.getArtistProducts()
     }
     
     getUserInfo(){
@@ -47,6 +52,16 @@ class Profile extends Component {
         .then( response => {
             this.setState({
                 userInfo: response.data[0],
+            })
+        })
+    }
+
+    getArtistProducts(){
+        axios.get( `/artist/${this.props.match.params.id}` )
+        .then( res => {
+            // console.log( res.data )
+            this.setState({
+                artistInfo: res.data
             })
         })
     }
@@ -168,6 +183,13 @@ class Profile extends Component {
 
     render(){
 
+        const item = this.state.artistInfo.map( item => {
+            return <Product 
+                        key={ item.id }
+                        products={ item }
+                    />
+        })
+
         const actions = [
             <FlatButton
               label="Cancel"
@@ -203,24 +225,43 @@ class Profile extends Component {
         const { username, bio, profile_pic } = this.state.userInfo
 
         return(
-            <div>
-                <div>
-                    <img 
-                        src={ profile_pic }
-                    />
-                    <div>
-                        <h1>
-                            { username }
-                        </h1>
+            <div className="container overflow-fix">
+                <div id="moreShopStuff">
+                    <div className="topContainer">
+                        <img 
+                            className="img-circle"
+                            src={ profile_pic }
+                        />
+                        <div className="infoContainer">
+                            <h1>
+                                { username }
+                            </h1> 
+                            <div className="bioContainer">
+                                { bio }
+                            </div>
+                        </div>
+                        <div className="buttonContainer">
+                            <div className="extra-margin">
+                                <RaisedButton 
+                                    label="SELL"
+                                    onClick={ this.handleOpen } 
+                                />
+                            </div>
+                            <div className="extra-margin">
+                                <RaisedButton
+                                    label="EDIT PROFILE"
+                                    onClick={ this.handleEditOpen }
+                                />
+                            </div>
+                        </div>
                     </div>
-                    <RaisedButton 
-                        label="Sell Something New" 
-                        onClick={ this.handleOpen } 
-                    />
-                    <RaisedButton
-                        label="Edit Profile"
-                        onClick={ this.handleEditOpen }
-                    />
+                    <div className="container">
+                    <div className="row" id="wider">
+                        <div className="row d-flex justify-content-center" id="moreShopStuff">
+                            { item }
+                        </div>
+                    </div>
+                </div>
                     <Dialog 
                         title="Edit Profile Information"
                         actions={ editActions }

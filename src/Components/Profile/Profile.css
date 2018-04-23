@@ -1,0 +1,34 @@
+.main-profile-container{
+    display: flex;
+    background-color: white;
+}
+.topContainer{
+    display: flex;
+    justify-content: space-evenly;
+    align-items: center;
+    height: 200px;
+    background-color: white;
+    border-radius: 5px;
+}
+.infoContainer{
+    display: flex;
+    flex-direction: column;
+    justify-content: space-evenly;
+    align-items: center;
+}
+.bioContainer{
+    background-color: #f9f9f9;
+    border-radius: 5px;
+}
+.buttonContainer{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+.extra-margin{
+    margin-top: 20px;
+}
+.overflow-fix{
+    overflow: auto;
+}
