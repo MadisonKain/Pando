@@ -22,7 +22,7 @@ class Nav extends Component {
         const userLoggedIn = this.props.user.username ?
             (
                 <nav className="navbar navbar-expand-lg navbar-light" id="navigation-bar">
-                    <Link className="navbar-brand" to="/" style={{ color: "white" }}>
+                    <Link className="navbar-brand" to="/" style={{ color: "white" }} id="navigationTitle">
                         P A N D O
                     </Link>
                     <button className="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarText" aria-controls="navbarText" aria-expanded="false" aria-label="Toggle navigation">

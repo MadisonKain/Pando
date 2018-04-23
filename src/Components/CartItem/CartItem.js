@@ -27,27 +27,46 @@ class CartItem extends Component {
     render(){
         const { name, picture, price, quantity } = this.props.products;
         return(
-            <div className="mainBox">
-                <h1 className='title'>
-                    { name }
-                </h1>
-                <div className="itemContainer">
-                    <img 
-                        className="itemPhoto"
-                        src={ picture }
-                    />
-                    <div className='stuff'>
-                        <div>
-                            ${ price }
-                        </div>
-                        <div>
-                            Qty: { quantity }
-                        </div>
-                        <IconButton>
-                            <Delete hoverColor={ deepOrange400 } 
-                                    onClick={ ()=> this.handleClick() }/>
-                        </IconButton>
+            // <div className="mainBox">
+            //     <h1 className='title'>
+            //         { name }
+            //     </h1>
+            //     <div className="itemContainer">
+            //         <img 
+            //             className="itemPhoto"
+            //             src={ picture }
+            //         />
+            //         <div className='stuff'>
+            //             <div>
+            //                 ${ price }
+            //             </div>
+            //             <div>
+            //                 Qty: { quantity }
+            //             </div>
+            //             <IconButton>
+            //                 <Delete hoverColor={ deepOrange400 } 
+            //                         onClick={ ()=> this.handleClick() }/>
+            //             </IconButton>
+            //         </div>
+            //     </div>
+            // </div>
+            <div className="mainCartItemContainer">
+                <div className="leftCartContainer">
+                    <img src={ picture } id="notTooBig"/>
+                </div>
+                <div className="rightCartContainer">
+                    <strong className="totalContainer">
+                        { `$${price}.00` }
+                    </strong>
+                    <div>
+                        { `QTY: ${ quantity }` } 
                     </div>
+                    <IconButton>
+                        <Delete 
+                            hoverColor={ deepOrange400 } 
+                            onClick={ ()=> this.handleClick() }
+                        />
+                    </IconButton>
                 </div>
             </div>
         )

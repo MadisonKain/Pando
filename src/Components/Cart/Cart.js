@@ -5,6 +5,7 @@ import './Cart.css';
 import Checkout from '../Checkout/Checkout';
 import { connect } from 'react-redux';
 import { getUserInfo } from '../../ducks/reducer';
+import { Link } from 'react-router-dom';
 
 
 import { IconButton } from 'material-ui';
@@ -47,7 +48,7 @@ class Cart extends Component {
 
     render() {
 
-        console.log( 'THIS.PROPS.USER', this.props.user )
+        console.log( this.state.total )
 
         const product = this.state.cartItems.map( item => {
             return <CartItem key={ item.id }
@@ -57,28 +58,30 @@ class Cart extends Component {
         
         const cartData = (this.state.total === 0) 
         ?
-            <div>
-                Check out our artists, and buy some art!
+            <div id="moreShopStuff" className="buySomething">
+                You have nothing in your cart. {<br/>}
+                Check out our artists, and buy some art!{<br/>}
             </div>
         :
-        <div>
-            <div className='pageTitle'>
-                MY CART
+            <div id="moreShopStuff" className="pleaseWork">
+                <div className="cartItemContainer">
+                    { product }
+                </div>
+                <div className="checkoutContainer">
+                    <strong className="dude">
+                        { `TOTAL: $${this.state.total}.00` }
+                    </strong>
+                    <Checkout 
+                        total={ this.state.total * 100 }
+                    />
+                </div>
             </div>
-            <div>
-                <h1>
-                    TOTAL: { this.state.total }
-                </h1>
-                { product }
-                <Checkout 
-                    total={ this.state.total * 100 }
-                />
-            </div>
-        </div>
-
 
         return (
-            <div>
+            <div className="container">
+                <div className="searchBar">
+                    My Cart
+                </div>
                 { cartData }
             </div>
         )

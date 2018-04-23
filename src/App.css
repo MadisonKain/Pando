@@ -14,6 +14,23 @@
 /* div.landing-container>img{
     opacity: 0.5;
 } */
-/* body {
-    z-index: -30;
-} */
+a:link {
+    text-decoration: none;
+    color: black;
+ }
+ 
+ a:visited {
+    text-decoration: none;
+    color: black;    
+ }
+ 
+ a:hover {
+    text-decoration: none;
+    color: black;
+    cursor: pointer;
+ }
+ 
+ a:active {
+    text-decoration: none;
+    color: black;    
+ }
