@@ -20,11 +20,10 @@ class ArtistProfile extends Component {
     getArtistProducts() {
         axios.get(`/artist/${this.props.match.params.id}`)
             .then(res => {
-                // console.log( res.data )
                 this.setState({
                     artistInfo: res.data
                 })
-            })
+            }).catch( err => {console.log( 'HEY', err) } )
     }
 
     render() {

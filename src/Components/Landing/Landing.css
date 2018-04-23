@@ -1,4 +1,30 @@
 .landingTitle{
-    color: #19B29C;
-    background-color: rgba(255, 255, 254, 0.75)
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    /* background-color: rgb(142, 151, 150); */
+    /* height: 100vh; */
+}
+.welcome-message{
+    color: white;
+    font-family: 'Lato', sans-serif;
+    font-size: 150px;
+    text-shadow: 2px 2px black;
+}
+.landing-container{
+    background-image: url('./background33.jpg');
+    /* background-image: url('https://i1.wp.com/www.dzzyn.com/wp-content/uploads/2016/02/20-FREE-BEAUTIFUL-HI-RES-WOOD-TEXTURE-WALLPAPER-BACKGROUNDS-06-Wild-Texture.jpg'); */
+    height: 100vh;
+    background-attachment: fixed;
+    background-repeat: repeat-x;
+    background-size: cover;
+    overflow: auto;
+}
+/* .bottomLandingContainer{
+    background-color: rgb(142, 151, 150);
+    height: 50vh;
+} */
+#evenMoreShopStuff{
+    margin-top: 600px;
 }

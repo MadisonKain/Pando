@@ -16,7 +16,7 @@ class App extends Component {
     return (
       <div>
         <Nav />
-        <div className="landing-container">
+        <div>
           {routes}
         </div>
       </div>

@@ -4,10 +4,17 @@ import { Navbar } from 'react-bootstrap/lib'
 
 function Landing() {
     return (
-        <div className="container">
-            <h1 className="landingTitle" id="moreShopStuff">
-                WELCOME
-            </h1>
+        <div className="landing-container">
+            <div className="landingTitle" id="moreShopStuff">
+                <strong>
+                    <h1 className="welcome-message">
+                        WELCOME
+                    </h1>
+                </strong>
+            </div>
+            <div className="bottomLandingContainer" id="moreShopStuff">
+                
+            </div>
         </div>
     )
 }

@@ -123,7 +123,7 @@ module.exports = {
         const { id } = req.params;
         db.get_artist_info( [id] )
         .then( response => {
-            res.status( 200 ).send( response )
+            res.status( 200 ).json( response )
         }).catch( err => { console.log( 'GET ARTIST INTO ERROR', err) } );
     }
 }
