@@ -21,10 +21,23 @@
     background-size: cover;
     overflow: auto;
 }
-/* .bottomLandingContainer{
-    background-color: rgb(142, 151, 150);
+.bottomLandingContainer{
+    /* background-color: rgb(142, 151, 150); */
     height: 50vh;
-} */
+    display: flex;
+    justify-content: center;
+    align-items: baseline;
+    /* color: white;
+    text-shadow: 2px 2px, black; */
+
+}
 #evenMoreShopStuff{
     margin-top: 600px;
+}
+.things{
+    color: white;
+    text-shadow: 2px 2px black;
+}
+.bigText{
+    font-size: 80px;
 }

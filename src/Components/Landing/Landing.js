@@ -1,6 +1,8 @@
 import React from 'react';
 import './Landing.css';
 import { Navbar } from 'react-bootstrap/lib'
+import { Link } from 'react-router-dom';
+import RaisedButton from 'material-ui/RaisedButton';
 
 function Landing() {
     return (
@@ -12,8 +14,13 @@ function Landing() {
                     </h1>
                 </strong>
             </div>
-            <div className="bottomLandingContainer" id="moreShopStuff">
-                
+            <div className="bottomLandingContainer">
+                <h1 className="things">
+                    To {<br/>}
+                    <h1 className="bigText">
+                        P A N D O
+                    </h1>
+                </h1>
             </div>
         </div>
     )

@@ -9,11 +9,7 @@ module.exports = {
             currency: 'usd',
             source: req.body.token.id,
             description: 'Test Charge for WITTY ART TITLE'
-        }
-        // , function(err, charge){
-        //     if (err) return res.sendStatus( 500 )
-        //     return res.sendStatus( 200 );}
-        )
+        })
         db.change_active_order( [req.session.passport.user] )
         .then( response => {
             res.sendStatus( 200 )
@@ -32,6 +28,7 @@ module.exports = {
         }).catch( err => { console.log('GET SELECTED ITEM ERROR', err ) } );
     },
     addToCart: ( req, res ) => {
+        console.log( req.params )
         req.app.get( 'db' ).find_active_order( [req.session.passport.user] )
         .then( order => {
             if ( !order[0] ){
@@ -43,7 +40,7 @@ module.exports = {
                 req.app.get( 'db' ).check_cart_for_item( [req.params.id, order[0].id] )
                 .then( cartItem => {
                     if( !cartItem[0] ){
-                        req.app.get( 'db' ).create_cart_item( [order[0].id, req.params.id, 1] )
+                        req.app.get( 'db' ).create_cart_item( [order[0].id, req.params.id, 1] ).catch(console.log)
                     }
                     else {
                         req.app.get( 'db' ).get_cart_quantity( [req.params.id, order[0].id] )
