@@ -6,7 +6,6 @@ import AddShoppingCart from 'material-ui/svg-icons/action/add-shopping-cart';
 import { amber500 } from 'material-ui/styles/colors';
 import { Link } from "react-router-dom";
 
-
 class SelectedItem extends Component {
     constructor( props ) {
         super( props )
