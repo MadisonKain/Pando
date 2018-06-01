@@ -8,18 +8,16 @@ function Landing() {
     return (
         <div className="landing-container">
             <div className="landingTitle" id="moreShopStuff">
-                <strong>
-                    <h1 className="welcome-message">
-                        WELCOME
-                    </h1>
-                </strong>
+                <h1 className="welcome-message">
+                    WELCOME
+                </h1>
             </div>
             <div className="bottomLandingContainer">
                 <h1 className="things">
                     To {<br/>}
-                    <h1 className="bigText">
+                    <p className="bigText">
                         P A N D O
-                    </h1>
+                    </p>
                 </h1>
             </div>
         </div>

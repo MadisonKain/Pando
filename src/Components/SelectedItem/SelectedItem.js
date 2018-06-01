@@ -15,6 +15,7 @@ class SelectedItem extends Component {
     }
 
     componentDidMount() {
+        console.log("component did mount params.id! ", this.props.match.params.id)
         axios.get( `/product/${this.props.match.params.id}` )
             .then( item => {
                 this.setState({
