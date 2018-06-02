@@ -117,9 +117,11 @@ module.exports = {
     },
     getArtistInfo: ( req, res ) => {
         db = req.app.get( 'db' )
+        console.log( "HIT CONTROLLER REQ.PARAMS.ID === ", req.params.id );
         const { id } = req.params;
         db.get_artist_info( [id] )
         .then( response => {
+            console.log("Response === ", response)
             res.status( 200 ).json( response )
         }).catch( err => { console.log( 'GET ARTIST INTO ERROR', err) } );
     }

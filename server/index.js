@@ -113,29 +113,19 @@ app.get( '/auth/logout', ( req, res )=> {
 // ================ ENDPOINTS =============== //
 
 app.get( '/shop', pc.getAllProducts );
-
 app.get( '/product/:id', pc.getSelectedItem );
-
 app.get( '/cart', pc.getCartItems );
-
 app.get( '/profile/:id', pc.getUserInfo );
-
 app.get( '/cart/total', pc.getCartTotal );
-
 app.get( '/artist/:id', pc.getArtistInfo );
 
 app.post( '/cart/add/:id', pc.addToCart );
-
 app.post( '/profile/newProduct', pc.postNewProduct );
-
 app.post( '/api/payment', pc.stripe );
 
 app.put( '/profile/edit', pc.updateProfileInfo );
 
 app.delete( '/cart/delete/:id', pc.deleteFromCart );
-
-
-
 
 
 app.listen( SERVER_PORT, () => console.log( `Searching for Rebel scum on port ${SERVER_PORT}`));
