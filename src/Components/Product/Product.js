@@ -17,12 +17,13 @@ class Product extends Component {
     }
 
     handleClick() {
-        axios.post(`/cart/add/${this.props.products.id}`)
+        axios.post( `/cart/add/${this.props.products.id}` )
     }
 
 
     render() {
         const { name, price, picture, id, username } = this.props.products;
+        console.log( "this is the id I am passing to Product! ===> ", id )
         return (
                 <div className="card mr-5 mb-5 mt-5" id="maximum-width">
                     <img className="card-img-top" src={ picture } alt="FOR SALE ITEM"/>

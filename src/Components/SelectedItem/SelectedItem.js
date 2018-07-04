@@ -25,11 +25,11 @@ class SelectedItem extends Component {
     }
 
     handleClick() {
-        console.log( this.state.product )
         axios.post(`/cart/add/${this.state.product[0].id}`)
     }
 
     render() {
+        console.log( "this.state.product!! = ", this.state.product )
         const { product } = this.state
         return (
             <div className="container">

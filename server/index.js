@@ -10,19 +10,21 @@ const cors = require('cors');
 const S3 = require( './S3' );
 
 const {
-   SERVER_PORT,
-   CONNECTION_STRING,
-   SESSION_SECRET,
-   DOMAIN,
-   CLIENT_ID,
-   CLIENT_SECRET,
-   CALLBACK_URL,
-   DEV_MODE
+    SERVER_PORT,
+    CONNECTION_STRING,
+    SESSION_SECRET,
+    DOMAIN,
+    CLIENT_ID,
+    CLIENT_SECRET,
+    CALLBACK_URL,
+    SUCCESS_REDIRECT,
+    FAILURE_REDIRECT,
+    RES_REDIRECT
 } = process.env;
 
 const app = express();
 
-app.use( express.static( `${__dirname}/../build` ) );
+// app.use( express.static( `${__dirname}/../build` ) );
 
 app.use(cors())
 app.use( bodyParser.json( { limit: '50MB' } ))
@@ -50,8 +52,9 @@ app.use( session({
    saveUninitialized: true
 }))
 
-app.use( passport.initialize() );
+// ===== AUTH 0 SETUP ===== //
 
+app.use( passport.initialize() );
 app.use( passport.session() );
 
 passport.use( new Auth0Strategy({
@@ -60,42 +63,40 @@ passport.use( new Auth0Strategy({
    clientSecret: CLIENT_SECRET,
    callbackURL: CALLBACK_URL,
    scope: 'openid profile'
-}, function( accessToken, refreshToken, extraParams, profile, done ) {
-   const db = app.get( 'db' );
-   db.find_user( [profile.id] ).then( userResult => {
-       if( !userResult[0] ) {
-           db.create_user([
-               profile.displayName,
-               profile.picture,
-               profile.id
-           ]).then( createdUser => {
-               return done( null, createdUser[0].id )
-           })
-       } else {
-           return done( null, userResult[0].id )
-       }
-   })
+}, function( accessToken, refreshToken, extraParams, profile, done ){
+    const db = app.get( 'db' );
+    db.find_user( [profile.id] ).then( userResult => {
+        if( !userResult[0] ){
+            db.create_user([
+                profile.displayName,
+                profile.picture,
+                profile.id
+            ]).then( createdUser => {
+                return done( null, createdUser[0].id )
+            })
+        } else {
+            return done( null, userResult[0].id )
+        }
+    })
 }))
-
-passport.serializeUser( ( id, done ) => {
-    // console.log( id )
-   done( null, id );
+passport.serializeUser( (id, done) => {
+    done( null, id );
+})
+passport.deserializeUser( (id, done) => {
+    app.get( 'db' ).find_session_user( [id] ).then( loggedInUser => {
+        done( null, loggedInUser[0] );
+    })
 })
 
-passport.deserializeUser( ( id, done ) => {
-    // console.log( id )
-   app.get( 'db' ).find_session_user( [id] ).then( loggedInUser => {
-    //    console.log( loggedInUser[0] )
-       done( null, loggedInUser[0] );
-   })
-})
-
-app.get( '/auth', passport.authenticate( 'auth0' ) )
-
+app.get( '/auth', passport.authenticate( 'auth0' ) );
 app.get( '/auth/callback', passport.authenticate( 'auth0', {
-   successRedirect: process.env.SUCCESS_REDIRECT,
-   failureRedirect: process.env.FAILURE_REDIRECT
+    successRedirect: SUCCESS_REDIRECT,
+    failureRedirect: FAILURE_REDIRECT
 }))
+app.get( '/auth/logout', (req, res) => {
+    req.logout();
+    res.redirect( RES_REDIRECT );
+})
 
 app.get( '/auth/me', function( req, res ) {
    if( req.user ) {
@@ -105,37 +106,21 @@ app.get( '/auth/me', function( req, res ) {
    }
 })
 
-app.get( '/auth/logout', ( req, res )=> {
-    req.logOut();
-    res.redirect( process.env.RES_REDIRECT );
-} )
-
 // ================ ENDPOINTS =============== //
 
 app.get( '/shop', pc.getAllProducts );
-
 app.get( '/product/:id', pc.getSelectedItem );
-
 app.get( '/cart', pc.getCartItems );
-
 app.get( '/profile/:id', pc.getUserInfo );
-
 app.get( '/cart/total', pc.getCartTotal );
-
 app.get( '/artist/:id', pc.getArtistInfo );
 
 app.post( '/cart/add/:id', pc.addToCart );
-
 app.post( '/profile/newProduct', pc.postNewProduct );
-
 app.post( '/api/payment', pc.stripe );
 
 app.put( '/profile/edit', pc.updateProfileInfo );
 
 app.delete( '/cart/delete/:id', pc.deleteFromCart );
 
-
-
-
-
-app.listen( SERVER_PORT, () => console.log( `Searching for Rebel scum on port ${SERVER_PORT}`));
+app.listen( SERVER_PORT, () => console.log( `===== Searching for Rebel scum on port ${SERVER_PORT} =====` ) );

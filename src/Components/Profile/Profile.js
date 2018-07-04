@@ -13,8 +13,6 @@ import { orange500 } from 'material-ui/styles/colors';
 import FloatingActionButton from 'material-ui/FloatingActionButton';
 import ContentAdd from 'material-ui/svg-icons/content/add';
 
-
-
 class Profile extends Component {
     constructor(){
         super()
@@ -59,7 +57,7 @@ class Profile extends Component {
     getArtistProducts(){
         axios.get( `/artist/${this.props.match.params.id}` )
         .then( res => {
-            // console.log( res.data )
+            console.log( "getArtistProducts res.data === ", res.data )
             this.setState({
                 artistInfo: res.data
             })
@@ -256,12 +254,12 @@ class Profile extends Component {
                         </div>
                     </div>
                     <div className="container">
-                    <div className="row" id="wider">
-                        <div className="row d-flex justify-content-center" id="moreShopStuff">
-                            { item }
+                        <div className="row" id="wider">
+                            <div className="row d-flex justify-content-center" id="moreShopStuff">
+                                { item }
+                            </div>
                         </div>
                     </div>
-                </div>
                     <Dialog 
                         title="Edit Profile Information"
                         actions={ editActions }
