@@ -7,7 +7,8 @@
 /coverage
 
 # production
-/build
+# /build 
+# ^^^^^^ commented out per heroku hosting repo's request!
 
 # misc
 .DS_Store

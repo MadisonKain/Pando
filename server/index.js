@@ -1,13 +1,13 @@
 require ( 'dotenv' ).config();
-const express = require( 'express' );
-const session = require( 'express-session' );
-const bodyParser = require( 'body-parser' );
-const massive = require( 'massive' );
-const passport = require( 'passport' );
-const Auth0Strategy = require( 'passport-auth0' );
-const pc = require( './controller' );
-const cors = require('cors');
-const S3 = require( './S3' );
+const express = require( 'express' ),
+      session = require( 'express-session' ),
+      bodyParser = require( 'body-parser' ),
+      massive = require( 'massive' ),
+      passport = require( 'passport' ),
+      Auth0Strategy = require( 'passport-auth0' ),
+      pc = require( './controller' ),
+      cors = require('cors'),
+      S3 = require( './S3' );
 
 const {
     SERVER_PORT,
@@ -24,23 +24,12 @@ const {
 
 const app = express();
 
-// app.use( express.static( `${__dirname}/../build` ) );
+app.use( express.static( `${__dirname}/../build` ) );
 
 app.use(cors())
 app.use( bodyParser.json( { limit: '50MB' } ))
 
 S3(app)
-
-// app.use( ( req, res, next ) => {
-//     if( DEV_MODE ){
-//         req.user = {
-//             id: 10,
-//             name: "Madison Kain",
-//             profile_pic: "https://lh6.googleusercontent.com/-aGfh3X45fWY/AAAAAAAAAAI/AAAAAAAAAKw/Ii_3qw-DxBk/photo.jpg"
-//         }
-//     }
-//     next();
-// })
 
 massive( CONNECTION_STRING ).then( db => {
    app.set( 'db', db )
