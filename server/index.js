@@ -44,6 +44,7 @@ app.use( session({
 // ===== AUTH 0 SETUP ===== //
 
 app.use( passport.initialize() );
+
 app.use( passport.session() );
 
 passport.use( new Auth0Strategy({
@@ -112,4 +113,4 @@ app.put( '/profile/edit', pc.updateProfileInfo );
 
 app.delete( '/cart/delete/:id', pc.deleteFromCart );
 
-app.listen( SERVER_PORT, () => console.log( `===== Searching for Rebel scum on port ${SERVER_PORT} =====` ) );
+app.listen( SERVER_PORT || 3000 , () => console.log( `===== Searching for Rebel scum on port ${SERVER_PORT} =====` ) );
