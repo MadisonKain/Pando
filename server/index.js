@@ -34,11 +34,11 @@ massive( CONNECTION_STRING ).then( db => {
    app.set( 'db', db )
 })
 
-app.use( session({
-   secret: SESSION_SECRET,
-   resave: false,
-   saveUninitialized: true
-}))
+// app.use( session({
+//    secret: SESSION_SECRET,
+//    resave: false,
+//    saveUninitialized: true
+// }))
 
 // ===== AUTH 0 SETUP ===== //
 
