@@ -47,9 +47,9 @@ app.use( passport.initialize() );
 app.use( passport.session() );
 
 passport.use( new Auth0Strategy({
-   domain: process.env.domain,
-   clientID: process.env.clientID,
-   clientSecret: process.env.clientSecret,
+   domain: DOMAIN,
+   clientID: CLIENT_ID,
+   clientSecret: CLIENT_SECRET,
    callbackURL: CALLBACK_URL,
    scope: 'openid profile'
 }, function( accessToken, refreshToken, extraParams, profile, done ){
