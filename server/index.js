@@ -10,7 +10,6 @@ const express = require( 'express' ),
       S3 = require( './S3' );
 
 const {
-    PORT,
     CONNECTION_STRING,
     SESSION_SECRET,
     DOMAIN,
@@ -113,4 +112,4 @@ app.put( '/profile/edit', pc.updateProfileInfo );
 
 app.delete( '/cart/delete/:id', pc.deleteFromCart );
 
-app.listen( PORT || 3000 , () => console.log( `===== Searching for Rebel scum on port ${PORT} =====` ) );
+app.listen( process.env.PORT || 3000 , () => console.log( `===== Searching for Rebel scum on port ${process.env.PORT} =====` ) );
