@@ -30,7 +30,7 @@ app.use( bodyParser.json( { limit: '50MB' } ))
 
 S3(app)
 
-massive( CONNECTION_STRING ).then( db => {
+massive( process.env.connectionString ).then( db => {
    app.set( 'db', db )
 })
 
@@ -47,9 +47,9 @@ app.use( passport.initialize() );
 app.use( passport.session() );
 
 passport.use( new Auth0Strategy({
-   domain: DOMAIN,
-   clientID: CLIENT_ID,
-   clientSecret: CLIENT_SECRET,
+   domain: process.env.domain,
+   clientID: process.env.clientID,
+   clientSecret: process.env.clientSecret,
    callbackURL: CALLBACK_URL,
    scope: 'openid profile'
 }, function( accessToken, refreshToken, extraParams, profile, done ){
